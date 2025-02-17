@@ -1,12 +1,99 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.8) ~  Much Love, Ferib 
+local HttpService = game:GetService("HttpService")
 
-]]--
+local Class = {}
+Class.__index = Class
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v14,v15) local v16={};for v37=1, #v14 do v6(v16,v0(v4(v1(v2(v14,v37,v37 + 1 )),v1(v2(v15,1 + (v37% #v15) ,1 + (v37% #v15) + 1 )))%256 ));end return v5(v16);end local v8=game:GetService(v7("\249\215\207\53\213\190\213\8\216\192\222","\126\177\163\187\69\134\219\167"));local v9={};v9.__index=v9;function ConnectTables(v17,v18) local v19=18 -(10 + 8) ;local v20;while true do local v38=0 -0 ;while true do if (v38==(442 -(416 + 26))) then if (v19==0) then local v53=0 -0 ;while true do if (v53==(0 + 0)) then v20={};for v60,v61 in pairs(v18) do local v62=0 -0 ;local v63;while true do if (v62==0) then v63=v17[v60];if v63 then if (typeof(v61)==v7("\55\204\40\201\249","\156\67\173\74\165")) then v20[v60]=ConnectTables(v63,v61);else v20[v60]=v63;end else v20[v60]=v61;end break;end end end v53=439 -(145 + 293) ;end if (v53==(431 -(44 + 386))) then v19=1487 -(998 + 488) ;break;end end end if (v19==(1 + 0)) then return v20;end break;end end end end function SplitString(v21,v22) local v23={};local v24=1;while true do local v39,v40=string.find(v21,v22,v24);if v39 then local v45=0 + 0 ;while true do if (v45==(772 -(201 + 571))) then table.insert(v23,string.sub(v21,v24,v39-1 ));v24=v40 + (1139 -(116 + 1022)) ;break;end end else table.insert(v23,string.sub(v21,v24));break;end end return v23;end function CreateDirectory(v25) local v26=0;local v27;while true do if ((0 -0)==v26) then v27=SplitString(v25,"/");for v49,v50 in ipairs(v27) do if ( #SplitString(v50,v7("\122\189","\38\84\215\41\118\220\70"))<1) then local v54=0 + 0 ;local v55;while true do if ((0 -0)==v54) then v55="";for v64=1,v49 do v55=v55   .. v27[v64]   .. "/" ;end v54=3 -2 ;end if (v54==1) then if  not isfolder(v55) then makefolder(v55);end break;end end end end break;end end end v9.new=function(v28,v29) local v30=859 -(814 + 45) ;local v31;while true do if (v30==1) then v31.base=v29;v31.data=v29;v30=4 -2 ;end if (v30==(1 + 1)) then setmetatable(v31,v9);CreateDirectory(v28);v30=2 + 1 ;end if (v30==3) then v31:Load();return v31;end if (v30==0) then local v48=885 -(261 + 624) ;while true do if (v48==(0 -0)) then v31={};v31.path=v28;v48=1;end if (v48==1) then v30=1081 -(1020 + 60) ;break;end end end end end;v9.Load=function(v32) if isfile(v32.path) then local v41=1423 -(630 + 793) ;local v42;local v43;while true do if (v41==(0 -0)) then v42,v43=pcall(function() return v8:JSONDecode(readfile(v32.path));end);if v42 then v32.data=ConnectTables(v43,v32.base);else v32.data=v32.base;writefile(v32.path,v8:JSONEncode(v32.base));end break;end end else local v44=0 -0 ;while true do if (0==v44) then v32.data=v32.base;writefile(v32.path,v8:JSONEncode(v32.base));break;end end end end;v9.Save=function(v33) local v34=0 + 0 ;local v35;local v36;while true do if (v34==0) then v35,v36=pcall(function() return v8:JSONEncode(v33.data);end);if v35 then writefile(v33.path,v36);else writefile(v33.path,v8:JSONEncode(v33.base));end break;end end end;return v9;
+function ConnectTables(cfg, cfg_base)
+    local new = {}
+    for key, value in pairs(cfg_base) do
+        local cfg_value = cfg[key]
+        if cfg_value then
+            if typeof(value) == "table" then
+                new[key] = ConnectTables(cfg_value, value)
+            else
+                new[key] = cfg_value
+            end
+        else
+            new[key] = value
+        end
+    end
+
+    return new
+end
+
+function SplitString(str, delimiter)
+    local result = {}
+    local start = 1
+    while true do
+        local s, e = string.find(str, delimiter, start)
+        if s then
+            table.insert(result, string.sub(str, start, s - 1))
+            start = e + 1
+        else
+            table.insert(result, string.sub(str, start))
+            break
+        end
+    end
+    return result
+end
+
+function CreateDirectory(path)
+    local parts = SplitString(path, "/")
+    for index, folder_name in ipairs(parts) do
+        if #SplitString(folder_name, ".j") < 1 then 
+            local crrpath = ""
+            for i = 1, index do
+                crrpath = crrpath .. parts[i] .. "/"
+            end
+
+            if not isfolder(crrpath) then
+                makefolder(crrpath)
+            end
+        end        
+    end
+end
+
+function Class.new(path, config_base)
+	local new = {}
+    new.path = path
+    new.base = config_base
+    new.data = config_base
+
+    setmetatable(new, Class)
+
+    CreateDirectory(path)
+    new:Load()
+    
+    return new
+end
+
+function Class:Load()
+    if isfile(self.path) then
+        local success, data = pcall(function()
+            return HttpService:JSONDecode(readfile(self.path))
+        end)
+        if success then
+            self.data = ConnectTables(data, self.base)
+        else
+            self.data = self.base
+            writefile(self.path, HttpService:JSONEncode(self.base))
+        end
+    else
+        self.data = self.base
+        writefile(self.path, HttpService:JSONEncode(self.base))
+    end
+end
+
+function Class:Save()
+    local success, data = pcall(function()
+        return HttpService:JSONEncode(self.data)
+    end)
+
+    if success then
+        writefile(self.path, data)
+    else
+        writefile(self.path, HttpService:JSONEncode(self.base)) 
+    end
+end
+
+return Class
