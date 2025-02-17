@@ -1,1 +1,100 @@
-local function obf_adjnqwidqwjhdpoq() local function obf_wrapperfunc(obf_arg) if obf_arg then local HttpService=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\4\36\10\171\242\41\34\8\178\194\41","\161\76\80\126\219"));local Class={};Class.__index=Class;function ConnectTables(cfg,cfg_base) local FlatIdent_52901=0;local FlatIdent_95CAC;local new;while true do if (FlatIdent_52901==1) then while true do if (FlatIdent_95CAC==1) then return new;end if (FlatIdent_95CAC==0) then local FlatIdent_2953F=0;while true do if (FlatIdent_2953F==0) then new={};for key,value in pairs(cfg_base) do local FlatIdent_47A9C=0;local FlatIdent_8D327;local cfg_value;while true do if (FlatIdent_47A9C==1) then while true do if (FlatIdent_8D327==0) then cfg_value=cfg[key];if cfg_value then if (typeof(value)==LUAOBFUSACTOR_DECRYPT_STR_0("\73\184\229\0\203","\34\61\217\135\108\174\62")) then new[key]=ConnectTables(cfg_value,value);else new[key]=cfg_value;end else new[key]=value;end break;end end break;end if (FlatIdent_47A9C==0) then FlatIdent_8D327=0;cfg_value=nil;FlatIdent_47A9C=1;end end end FlatIdent_2953F=1;end if (FlatIdent_2953F==1) then FlatIdent_95CAC=1;break;end end end end break;end if (FlatIdent_52901==0) then FlatIdent_95CAC=0;new=nil;FlatIdent_52901=1;end end end function SplitString(str,delimiter) local FlatIdent_24A02=0;local result;local start;while true do if (FlatIdent_24A02==1) then local FlatIdent_44839=0;while true do if (FlatIdent_44839==0) then while true do local s,e=string.find(str,delimiter,start);if s then local FlatIdent_25011=0;local FlatIdent_12703;while true do if (FlatIdent_25011==0) then FlatIdent_12703=0;while true do if (FlatIdent_12703==0) then table.insert(result,string.sub(str,start,s-1 ));start=e + 1 ;break;end end break;end end else table.insert(result,string.sub(str,start));break;end end return result;end end end if (FlatIdent_24A02==0) then local FlatIdent_7DD24=0;while true do if (FlatIdent_7DD24==1) then FlatIdent_24A02=1;break;end if (FlatIdent_7DD24==0) then result={};start=1;FlatIdent_7DD24=1;end end end end end function CreateDirectory(path) local FlatIdent_C460=0;local FlatIdent_63487;local parts;while true do if (FlatIdent_C460==0) then FlatIdent_63487=0;parts=nil;FlatIdent_C460=1;end if (FlatIdent_C460==1) then while true do if (FlatIdent_63487==0) then parts=SplitString(path,"/");for index,folder_name in ipairs(parts) do local FlatIdent_44839=0;local crrpath;while true do if (FlatIdent_44839==1) then for i=1,index do crrpath=crrpath   .. parts[i]   .. "/" ;end if  not isfolder(crrpath) then makefolder(crrpath);end break;end if (FlatIdent_44839==0) then local FlatIdent_E652=0;while true do if (FlatIdent_E652==1) then FlatIdent_44839=1;break;end if (0==FlatIdent_E652) then if ( #SplitString(folder_name,LUAOBFUSACTOR_DECRYPT_STR_0("\57\249","\30\23\147\215"))>1) then continue;end crrpath="";FlatIdent_E652=1;end end end end end break;end end break;end end end Class.new=function(path,config_base) local FlatIdent_39B0=0;local new;while true do local FlatIdent_6053C=0;while true do if (FlatIdent_6053C==0) then if (FlatIdent_39B0==2) then setmetatable(new,Class);CreateDirectory(path);FlatIdent_39B0=3;end if (3==FlatIdent_39B0) then new:Load();return new;end FlatIdent_6053C=1;end if (FlatIdent_6053C==1) then if (FlatIdent_39B0==1) then local FlatIdent_99389=0;while true do if (FlatIdent_99389==1) then FlatIdent_39B0=2;break;end if (FlatIdent_99389==0) then new.base=config_base;new.data=config_base;FlatIdent_99389=1;end end end if (FlatIdent_39B0==0) then local FlatIdent_7A75F=0;while true do if (FlatIdent_7A75F==1) then FlatIdent_39B0=1;break;end if (FlatIdent_7A75F==0) then new={};new.path=path;FlatIdent_7A75F=1;end end end break;end end end end;Class.Load=function(self) if isfile(self.path) then local FlatIdent_E0D0=0;local FlatIdent_61B23;local success;local data;while true do if (FlatIdent_E0D0==0) then FlatIdent_61B23=0;success=nil;FlatIdent_E0D0=1;end if (FlatIdent_E0D0==1) then data=nil;while true do if (FlatIdent_61B23==0) then success,data=pcall(function() return HttpService:JSONDecode(readfile(self.path));end);if success then self.data=ConnectTables(data,self.base);else local FlatIdent_39EBF=0;while true do if (FlatIdent_39EBF==0) then self.data=self.base;writefile(self.path,HttpService:JSONEncode(self.base));break;end end end break;end end break;end end else local FlatIdent_8BF78=0;local FlatIdent_E652;while true do if (FlatIdent_8BF78==0) then FlatIdent_E652=0;while true do if (0==FlatIdent_E652) then self.data=self.base;writefile(self.path,HttpService:JSONEncode(self.base));break;end end break;end end end end;Class.Save=function(self) local FlatIdent_817B0=0;local FlatIdent_27957;local success;local data;while true do if (FlatIdent_817B0==0) then FlatIdent_27957=0;success=nil;FlatIdent_817B0=1;end if (FlatIdent_817B0==1) then data=nil;while true do if (0==FlatIdent_27957) then success,data=pcall(function() return HttpService:JSONEncode(self.data);end);if success then writefile(self.path,data);else writefile(self.path,HttpService:JSONEncode(self.base));end break;end end break;end end end;return Class;else local sdawdwqdq=obf_arg[1];end end if (obf_tonumber(obf_stringmatch(obf_stringmatch(({obf_pcall(obf_wrapperfunc,nil)})[2],":%d+:"),"%d+"))==1) then return obf_wrapperfunc({});else return obf_adjnqwidqwjhdpoq();end end return obf_adjnqwidqwjhdpoq();
+local HttpService = game:GetService("HttpService")
+
+local Class = {}
+Class.__index = Class
+
+function ConnectTables(cfg, cfg_base)
+    local new = {}
+    for key, value in pairs(cfg_base) do
+        local cfg_value = cfg[key]
+        if cfg_value then
+            if typeof(value) == "table" then
+                new[key] = ConnectTables(cfg_value, value)
+            else
+                new[key] = cfg_value
+            end
+        else
+            new[key] = value
+        end
+    end
+
+    return new
+end
+
+function SplitString(str, delimiter)
+    local result = {}
+    local start = 1
+    while true do
+        local s, e = string.find(str, delimiter, start)
+        if s then
+            table.insert(result, string.sub(str, start, s - 1))
+            start = e + 1
+        else
+            table.insert(result, string.sub(str, start))
+            break
+        end
+    end
+    return result
+end
+
+function CreateDirectory(path)
+    local parts = SplitString(path, "/")
+    for index, folder_name in ipairs(parts) do
+        if #SplitString(folder_name, ".j") > 1 then continue end
+
+        local crrpath = ""
+        for i = 1, index do
+            crrpath = crrpath .. parts[i] .. "/"
+        end
+
+        if not isfolder(crrpath) then
+            makefolder(crrpath)
+        end
+    end
+
+end
+
+function Class.new(path, config_base)
+	local new = {}
+    new.path = path
+    new.base = config_base
+    new.data = config_base
+
+    setmetatable(new, Class)
+
+    CreateDirectory(path)
+    new:Load()
+    
+    return new
+end
+
+function Class:Load()
+    if isfile(self.path) then
+        local success, data = pcall(function()
+            return HttpService:JSONDecode(readfile(self.path))
+        end)
+        if success then
+            self.data = ConnectTables(data, self.base)
+        else
+            self.data = self.base
+            writefile(self.path, HttpService:JSONEncode(self.base))
+        end
+    else
+        self.data = self.base
+        writefile(self.path, HttpService:JSONEncode(self.base))
+    end
+end
+
+function Class:Save()
+    local success, data = pcall(function()
+        return HttpService:JSONEncode(self.data)
+    end)
+
+    if success then
+        writefile(self.path, data)
+    else
+        writefile(self.path, HttpService:JSONEncode(self.base)) 
+    end
+end
+
+return Class
