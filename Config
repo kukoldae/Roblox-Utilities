@@ -41,7 +41,10 @@ function CreateDirectory(path)
     print("Path:", path)
     local parts = SplitString(path, "/")
     for index, folder_name in ipairs(parts) do
-        if #SplitString(folder_name, ".j") < 1 then 
+        if #SplitString(folder_name, ".j") > 1 then
+            
+        else
+                 
             local crrpath = ""
             for i = 1, index do
                 crrpath = crrpath .. parts[i] .. "/"
